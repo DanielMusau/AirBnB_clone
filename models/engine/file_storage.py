@@ -12,9 +12,12 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
         """Returns the dictionary '__objects'."""
-        return FileStorage.__objects
+        if cls is not None:
+            return {k: v for k, v in FileStorage.__objects.items()
+                    if isinstance(v, cls)}
+        return FileStorage.__objects.copy()
 
     def new(self, obj):
         """Sets in '__objects' the obj with key."""

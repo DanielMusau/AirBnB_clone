@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             try:
                 cls = eval(arg)
-                objs = storage.all()
+                objs = storage.all(cls)
             except NameError:
                 print("** class doesn't exist **")
                 return
