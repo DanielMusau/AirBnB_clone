@@ -4,6 +4,11 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -60,17 +65,19 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
+
         try:
             cls = eval(args[0])
         except NameError:
             print("** class doesn't exist **")
             return
+
         if len(args) < 2:
             print("** instance id missing **")
             return
+
         objs = storage.all()
         key = f"{args[0]}.{args[1]}"
-
         if key not in objs:
             print("** no instance found **")
             return

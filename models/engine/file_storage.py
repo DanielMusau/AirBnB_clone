@@ -17,7 +17,7 @@ class FileStorage:
         if cls is not None:
             return {k: v for k, v in FileStorage.__objects.items()
                     if isinstance(v, cls)}
-        return FileStorage.__objects.copy()
+        return FileStorage.__objects
 
     def new(self, obj):
         """Sets in '__objects' the obj with key."""
@@ -38,8 +38,20 @@ class FileStorage:
         """Deserializes the JSON file to '__objects'."""
         from models.base_model import BaseModel
         from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
 
-        dict_obj = {'BaseModel': BaseModel, 'User': User}
+        dict_obj = {'BaseModel': BaseModel,
+                    'User': User,
+                    'State': State,
+                    'City': City,
+                    'Amenity': Amenity,
+                    'Place': Place,
+                    'Review': Review
+                    }
 
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r', encoding='UTF-8') as f:
