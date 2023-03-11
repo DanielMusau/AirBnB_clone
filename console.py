@@ -158,29 +158,35 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """Handle default behavior for command not recognized."""
-        parts = line.split('.')
-        if len(parts) == 2 and parts[1] == 'count()':
-            try:
-                cls_name = parts[0]
-                cls = eval(cls_name)
-                count = storage.count(cls)
-                print(count)
-            except NameError:
-                print("** class doesn't exist **")
-
-        elif len(parts) == 2 and parts[1] == 'all()':
-            try:
-                cls_name = parts[0]
-                cls = eval(cls_name)
-                objs = storage.all(cls)
-            except NameError:
-                print("** class doesn't exist **")
-
+        args = line.split(".")
+        cls_name = args[0]
+        command = args[1].split("(")[0]
+        try:
+            cls = eval(cls_name)
+        except NameError:
+            print("** class doesn't exist **")
+            return
+        if command == "all":
+            objs = storage.all(cls)
             for obj_id in objs.keys():
                 obj = objs[obj_id]
                 print(obj)
+            return
+        elif command == "count":
+            print(storage.count(cls))
+            return
+        elif command == "show":
+            if len(args[1]) > 4:
+                id_str = args[1].split("(")[1].split(")")[0]
+                obj_id = id_str.strip("\"'")
+                key = f"{cls_name}.{obj_id}"
+                if key in storage.all():
+                    print(storage.all()[key])
+                    return
+            print("** no instance found **")
+            return
         else:
-            print(f"** Unknown syntax: {line}")
+            print(f"** Unknown syntax: {line} **")
 
     def do_EOF(self, line):
         """exit the program with EOF."""
