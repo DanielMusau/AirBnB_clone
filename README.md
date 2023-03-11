@@ -48,6 +48,8 @@ This repository constains the following files:
 Clone the repository and run the console.py
 ```
 $ git clone https://github.com/------/AirBnB_clone.git
+$ cd AirBnB_clone
+$ ./console.py
 ```
 
 ## Usage :wrench:
