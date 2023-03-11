@@ -156,16 +156,31 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
-    def do_count(self, cls_name):
-        """Counts the number of instances of a class."""
-        count = 0
-        objs = storage.all()
+    def default(self, line):
+        """Handle default behavior for command not recognized."""
+        parts = line.split('.')
+        if len(parts) == 2 and parts[1] == 'count()':
+            try:
+                cls_name = parts[0]
+                cls = eval(cls_name)
+                count = storage.count(cls)
+                print(count)
+            except NameError:
+                print("** class doesn't exist **")
 
-        for key, value in objs.items():
-            cls = key.split('.')
-            if cls[0] == cls_name:
-                count += 1
-        print(count)
+        elif len(parts) == 2 and parts[1] == 'all()':
+            try:
+                cls_name = parts[0]
+                cls = eval(cls_name)
+                objs = storage.all(cls)
+            except NameError:
+                print("** class doesn't exist **")
+
+            for obj_id in objs.keys():
+                obj = objs[obj_id]
+                print(obj)
+        else:
+            print(f"** Unknown syntax: {line}")
 
     def do_EOF(self, line):
         """exit the program with EOF."""

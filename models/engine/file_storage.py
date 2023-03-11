@@ -34,6 +34,19 @@ class FileStorage:
         with open(FileStorage.__file_path, 'w', encoding='UTF-8') as f:
             json.dump(dict_obj, f)
 
+    def count(self, cls=None):
+        """Count number of objects in storage or count objects
+        of a given class."""
+        if cls is None:
+            return len(FileStorage.__objects)
+        else:
+            count = 0
+            for obj_id in FileStorage.__objects:
+                obj = FileStorage.__objects[obj_id]
+                if type(obj) == cls:
+                    count += 1
+            return count
+
     def reload(self):
         """Deserializes the JSON file to '__objects'."""
         from models.base_model import BaseModel
