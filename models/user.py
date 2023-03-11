@@ -2,7 +2,7 @@
 """Module contains class 'User' that inherits
 from 'BaseModel'."""
 from models.base_model import BaseModel
-
+from models import storage
 
 class User(BaseModel):
     """User class that inherits from BaseModel."""
@@ -14,3 +14,8 @@ class User(BaseModel):
     def __init__(self, *args, **kwargs):
         """Initialization method."""
         super().__init__(*args, **kwargs)
+
+    @classmethod
+    def all(cls):
+        """Returning all class User instances."""
+        return list(storage.all(cls).values())

@@ -91,6 +91,10 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: all <class name> or all <.>
         """
+        if not arg:
+            print("** class name missing **")
+            return
+
         if arg == '.':
             objs = storage.all()
         else:
@@ -151,6 +155,17 @@ class HBNBCommand(cmd.Cmd):
         Usage: quit
         """
         return True
+
+    def do_count(self, cls_name):
+        """Counts the number of instances of a class."""
+        count = 0
+        objs = storage.all()
+
+        for key, value in objs.items():
+            cls = key.split('.')
+            if cls[0] == cls_name:
+                count += 1
+        print(count)
 
     def do_EOF(self, line):
         """exit the program with EOF."""
