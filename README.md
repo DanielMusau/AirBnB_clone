@@ -1,123 +1,115 @@
-0x00 AirBnB clone - The console
-In this directory you will find a implementation of a AirBnB clone. In this first step is implemented the Console. Commands for create, update, destroy, show and manage diferent classes and attributes for the items that the app will be offer and for the users.
+# AirBnB Clone
+![HBnB Logo](./image/hbnb_logo.png)
 
-The console
-create your data model
-manage (create, update, destroy, etc) objects via a console / command interpreter
-store and persist objects to a file (JSON file) The first piece is to manipulate a powerful storage system. This storage engine will give us an abstraction between “My object” and “How they are stored and persisted”. This means: from your console code (the command interpreter itself) and from the front-end and RestAPI you will build later, you won’t have to pay attention (take care) of how your objects are stored. This abstraction will also allow you to change the type of storage easily without updating all of your codebase. The console will be a tool to validate this storage engine
-Command interpreter
-Our command interpreter looks like a mini shell and allow us manage the objects of our project:
 
-Create a new object (ex: a new User or a new Place)
-Retrieve an object from a file, a database etc…
-Do operations on objects (count, compute stats, etc…)
-Update attributes of an object
-Destroy an object
-Objectives of project
-How to create a Python package
-How to create a command interpreter in Python using the cmd module
-What is Unit testing and how to implement it in a large project
-How to serialize and deserialize a Class
-How to write and read a JSON file
-How to manage datetime
-What is an UUID
-What is *args and how to use it
-What is **kwargs and how to use it
-How to handle named arguments in a function
-Content of Directory
-Models Folder: Classes of the project. BaseModel is the parent Class. The other classes (amenity, city, place, review, state, user) inherit from BaseModel and specify others attributes for itselfs.
-Tests Folder : Unittests for the project
-AUTHORS: Information about the authors
-console.py: Eceutable file for the console
-file.json: JSON file with all information of instances
-Table of Contents
-Examples and Usage
-Installation
-Documentation
-Contributing
-Team
-Support
-License
-Examples of Usage
-Execution
-$ ./console.py
-(hbnb) help
+### Contents
 
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
+- [Description](#Description)
+- [Environment](#Environment)
+- [Further Information](#Furtherinformation)
+- [Requirements](#Requirements)
+- [Repo Contents](#FileContents)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Built with](#Built-with)
+- [Acknowledgements](#Acknowledgements)
 
-(hbnb) 
-(hbnb) 
+## Description :page_facing_up:
+This is the first phase of a four phase project, to create a basic clone of the AirBnB web app. In this first phase a basic console was created using the Cmd Python module, to manage the objects of the whole project, being able to implement the methods create, show, update, all, and destroy to the existing classes and subclasses.
+
+
+## Environment :computer:
+The console was developed in Ubuntu 20.04.5LTS using python3 (version 3.10.10).
+
+### Further information :bookmark_tabs:
+For further information on python version, and documentation visit [python.org](https://www.python.org/).
+
+## Requirements :memo:
+Knowledge in python3, how to use a command line interpreter, a computer with Ubuntu 20.04.5, python3 and pep8 style corrector.
+
+## Repo Contents :clipboard:
+This repository constains the following files:
+
+|   **File**   |   **Description**   |
+| -------------- | --------------------- |
+|[AUTHORS](./AUTHORS) | Contains info about authors of the project |
+|[base_model.py](./models/base_model.py) | Defines BaseModel class (parent class), and methods |
+|[user.py](./models/user.py) | Defines subclass User |
+|[amenity.py](./models/amenity.py) | Defines subclass Amenity |
+|[city.py](./models/city.py)| Defines subclass City |
+|[place.py](./models/place.py)| Defines subclass Place |
+|[review.py](./models/review.py) | Defines subclass Review |
+|[state.py](./models/state.py) | Defines subclass State |
+|[file_storage.py](./models/engine/file_storage.py) | Creates new instance of class, serializes and deserializes data |
+|[console.py](./console.py) | creates object, retrieves object from file, does operations on objects, updates attributes of object and destroys object |
+|[test_base_model.py](./tests/test_models/test_base_model.py) | unittests for base_model |
+
+## Installation :hammer_and_wrench:
+Clone the repository and run the console.py
+```
+$ git clone https://github.com/------/AirBnB_clone.git
+```
+
+## Usage :wrench:
+
+|   **Method**   |   **Description**   |
+| -------------- | --------------------- |
+|[create](./console.py) | Creates object of given class |
+|[show](./console.py) | Prints the string representation of an instance based on the class name and id |
+|[all](./console.py) | Prints all string representation of all instances based or not on the class name |
+|[update](./console.py) | Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file) |
+|[destroy](./console.py)| Deletes an instance based on the class name and id (save the change into the JSON file) |
+|[count](./console.py)| Retrieve the number of instances of a class |
+|[help](./console.py)| Prints information about specific command |
+|[quit/ EOF](./console.py)| Exit the program |
+
+###### Example No.1
+
+```
+➜  AirBnB_clone git:(feature) ✗ ./console.py
+(hbnb) create User
+bb4f4b81-7757-460b-9263-743c9ea6fef6
+(hbnb) show User bb4f4b81-7757-460b-9263-743c9ea6fef6
+[User] (bb4f4b81-7757-460b-9263-743c9ea6fef6) {'updated_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492139), 'id': 'bb4f4b81-7757-460b-9263-743c9ea6fef6', 'created_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492106)}
+(hbnb) all User
+["[User] (bb4f4b81-7757-460b-9263-743c9ea6fef6) {'updated_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492139), 'id': 'bb4f4b81-7757-460b-9263-743c9ea6fef6', 'created_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492106)}"]
+(hbnb) update User bb4f4b81-7757-460b-9263-743c9ea6fef6 name Betty
+['User', 'bb4f4b81-7757-460b-9263-743c9ea6fef6', 'name', 'Betty']
+(hbnb) all User
+["[User] (bb4f4b81-7757-460b-9263-743c9ea6fef6) {'updated_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492139), 'id': 'bb4f4b81-7757-460b-9263-743c9ea6fef6', 'name': 'Betty', 'created_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492106)}"]
+(hbnb) destroy User bb4f4b81-7757-460b-9263-743c9ea6fef6
+(hbnb) all User
+[]
+(hbnb) show User
+** instance id missing **
+(hbnb)
+
+```
+
+###### Example No.2
+
+```
+➜  AirBnB_clone git:(feature) ✗ ./console.py
+(hbnb) User.all()
+["[User] (e6ee5344-04ef-454d-84e4-ba6fc613f1b4) {'id': 'e6ee5344-04ef-454d-84e4-ba6fc613f1b4', 'updated_at': datetime.datetime(2019, 11, 13, 17, 14, 1, 963404), 'created_at': datetime.datetime(2019, 11, 13, 17, 14, 1, 963373)}"]
+(hbnb) User.show()
+** instance id missing **
+(hbnb) User.show(e6ee5344-04ef-454d-84e4-ba6fc613f1b4)
+[User] (e6ee5344-04ef-454d-84e4-ba6fc613f1b4) {'id': 'e6ee5344-04ef-454d-84e4-ba6fc613f1b4', 'updated_at': datetime.datetime(2019, 11, 13, 17, 14, 1, 963404), 'created_at': datetime.datetime(2019, 11, 13, 17, 14, 1, 963373)}
 (hbnb) quit
-$
-create
-Creat an instance and show us the id number
+➜  AirBnB_clone git:(feature) ✗
 
-vagrant@vagrant-ubuntu-trusty-64:~/AirBnB_clone$ ./console.py 
-(hbnb) create BaseModel
-e37cf8df-351a-4df6-9d15-fd9331a5bfb2
-(hbnb) 
-Show
-Show the Class, object if the id is especified and its attributes
+```
 
-(hbnb) show BaseModel e37cf8df-351a-4df6-9d15-fd9331a5bfb2
-[BaseModel] (e37cf8df-351a-4df6-9d15-fd9331a5bfb2) {'id': 'e37cf8df-351a-4df6-9d15-fd9331a5bfb2', 'created_at': datetime.datetime(2020, 7, 1, 18, 50, 15, 695895), 'updated_at': datetime.datetime(2020, 7, 1, 18, 50, 15, 695945)}
-(hbnb) 
-all
-shows all the instances
+## Built with :gear:
+python3 (3.10.10)
 
-(hbnb) all BaseModel
-["[BaseModel] (5c8ebd08-a708-4823-b9a2-29d58b87c063) {'id': '5c8ebd08-a708-4823-b9a2-29d58b87c063', 'created_at': datetime.datetime(2020, 7, 1, 5, 4, 54, 926171), 'updated_at': datetime.datetime(2020, 7, 1, 5, 4, 54, 926179)}", "[BaseModel] (e576e179-8bb6-4229-a8be-90585b0c1d01) {'id': 'e576e179-8bb6-4229-a8be-90585b0c1d01', 'created_at': datetime.datetime(2020, 7, 1, 5, 5, 38, 896687), 'updated_at': datetime.datetime(2020, 7, 1, 5, 5, 38, 896706)}", "[BaseModel] (0763761f-4534-4a02-8097-79a4ab935ecb) {'id': '0763761f-4534-4a02-8097-79a4ab935ecb', 'created_at': datetime.datetime(2020, 7, 1, 4, 8, 48, 451468), 'updated_at': datetime.datetime(2020, 7, 1, 4, 8, 48, 451881)}", "[BaseModel] (f794d1ba-6688-42b8-ae08-0b307125643a) {'id': 'f794d1ba-6688-42b8-ae08-0b307125643a', 'created_at': datetime.datetime(2020, 7, 1, 5, 4, 54, 922410), 'updated_at': datetime.datetime(2020, 7, 1, 5, 4, 54, 923071)}", "[BaseModel] (ef9b217c-b58c-4d5f-b797-0dbbed80dedd) {'id': 'ef9b217c-b58c-4d5f-b797-0dbbed80dedd', 'created_at': datetime.datetime(2020, 7, 1, 5, 4, 54, 930489), 'updated_at': datetime.datetime(2020, 7, 1, 5, 4, 54, 930504)}", "[BaseModel] (e37cf8df-351a-4df6-9d15-fd9331a5bfb2) {'id': 'e37cf8df-351a-4df6-9d15-fd9331a5bfb2', 'created_at': datetime.datetime(2020, 7, 1, 18, 50, 15, 695895), 'updated_at': datetime.datetime(2020, 7, 1, 18, 50, 15, 695945)}", "[BaseModel] (82f3d1a2-c28d-4327-be5f-0bceb29b0eb9) {'id': '82f3d1a2-c28d-4327-be5f-0bceb29b0eb9', 'created_at': datetime.datetime(2020, 7, 1, 5, 5, 38, 888932), 'updated_at': datetime.datetime(2020, 7, 1, 5, 5, 38, 889340)}", "[BaseModel] (e029daa8-9083-4097-b2bd-a66fe4895532) {'id': 'e029daa8-9083-4097-b2bd-a66fe4895532', 'created_at': datetime.datetime(2020, 7, 1, 5, 5, 38, 892554), 'updated_at': datetime.datetime(2020, 7, 1, 5, 5, 38, 892561)}"
-(hbnb) 
-update
-update an instance
+### Version :pushpin:
+HBnB - version 9.6
 
-(hbnb) show BaseModel e37cf8df-351a-4df6-9d15-fd9331a5bfb2
-[BaseModel] (e37cf8df-351a-4df6-9d15-fd9331a5bfb2) {'id': 'e37cf8df-351a-4df6-9d15-fd9331a5bfb2', 'created_at': datetime.datetime(2020, 7, 1, 18, 50, 15, 695895), 'updated_at': datetime.datetime(2020, 7, 1, 18, 50, 15, 695945)}
-(hbnb) update BaseModel e37cf8df-351a-4df6-9d15-fd9331a5bfb2 first_name "CharlieMeco"
-(hbnb) show BaseModel e37cf8df-351a-4df6-9d15-fd9331a5bfb2
-[BaseModel] (e37cf8df-351a-4df6-9d15-fd9331a5bfb2) {'first_name': '"CharlieMeco"', 'id': 'e37cf8df-351a-4df6-9d15-fd9331a5bfb2', 'created_at': datetime.datetime(2020, 7, 1, 18, 50, 15, 695895), 'updated_at': datetime.datetime(2020, 7, 1, 18, 50, 15, 695945)}
-(hbnb) 
-Destroy
-Delete an instance
+### Acknowledgements :raised_hands:
+To all the peers that contribuited with their knowledge
 
-(hbnb) destroy BaseModel e37cf8df-351a-4df6-9d15-fd9331a5bfb2
-(hbnb) show BaseModel e37cf8df-351a-4df6-9d15-fd9331a5bfb2
-** no instance found **
-(hbnb) 
-Installation
-Clone the repository. git clone https://github.com/DanielMbithiMusau/AirBnB_clone.git
-Open the /AirBnB_clone directory and execute console.py
-Setup
-You need Python interpreter. IMPORTANT: The project was created in UBUNTU 20.04 LTS and Python 3.4.3.
-Documentation
-cmd module
-packages
-uuid module
-datetime
-unittest module
-args/kwargs
-Python test cheatsheet
-Contributing
-To get started...
-
-Step 1
-Option 1
-
-🍴 Fork this repo!
-Option 2
-
-👯 Clone this repo to your local machine using
-Step 2
-HACK AWAY! 🔨🔨🔨
-Step 3
-🔃 Create a new pull request using.
-Team
-DanielMbithiMusau krisphinna
-
-Support
-Feel free to contact us!
-
-GitHub at DanielMbithiMusau
-GitHub at krisphinna
+### Authors :fountain_pen:
+* Daniel Musau - @DanielMbithiMusau
+* Kris Adelowo - @krisphinna
