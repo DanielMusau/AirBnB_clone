@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Shell console for the application"""
 import cmd
+import shlex
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -186,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return
         elif command == "destroy":
-            if len(args[1]) > 7:
+            if len(args[1]) > 4:
                 id_str = args[1].split("(")[1].split(")")[0]
                 obj_id = id_str.strip("\"'")
                 key = f"{cls_name}.{obj_id}"
@@ -198,6 +199,23 @@ class HBNBCommand(cmd.Cmd):
                 del objs[key]
                 storage.save()
                 return
+        elif command == "update":
+            if len(args[1]) > 4:
+                arg_list = shlex.split(args[1][:-1])
+                obj_id = arg_list[0].strip("\"'")
+                attr_name = arg_list[1]
+                attr_val = arg_list[2].strip("\"'")
+                key = f"{cls_name}.{obj_id}"
+                objs = storage.all()
+
+                if key not in objs:
+                    print("** no instance found **")
+                    return
+
+                obj = objs[key]
+                setattr(obj, attr_name, attr_val)
+                obj.save()
+
         else:
             print(f"** Unknown syntax: {line} **")
 
