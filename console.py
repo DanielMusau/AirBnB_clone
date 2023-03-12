@@ -201,10 +201,23 @@ class HBNBCommand(cmd.Cmd):
                 return
         elif command == "update":
             if len(args[1]) > 4:
+                if len(args) < 2:
+                    print("** instance id missing **")
+                    return
                 arg_list = shlex.split(args[1][:-1])
-                obj_id = arg_list[0].strip("\"'")
-                attr_name = arg_list[1]
+                
+                if len(arg_list) < 2:
+                    print("** attribute name missing **")
+                    return
+                if len(arg_list) < 3:
+                    print("** value missing **")
+                    return
+
+                obj_id = arg_list[0].replace("update", '').replace('(', '').replace('"', '').replace(',', '')
+                attr_name = arg_list[1].replace(',', '')
                 attr_val = arg_list[2].strip("\"'")
+                print(attr_val)
+
                 key = f"{cls_name}.{obj_id}"
                 objs = storage.all()
 
