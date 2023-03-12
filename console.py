@@ -185,6 +185,19 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
             return
+        elif command == "destroy":
+            if len(args[1]) > 7:
+                id_str = args[1].split("(")[1].split(")")[0]
+                obj_id = id_str.strip("\"'")
+                key = f"{cls_name}.{obj_id}"
+                objs = storage.all()
+
+                if key not in objs:
+                    print("** no instance found **")
+                    return
+                del objs[key]
+                storage.save()
+                return
         else:
             print(f"** Unknown syntax: {line} **")
 
