@@ -205,7 +205,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** instance id missing **")
                     return
                 arg_list = shlex.split(args[1][:-1])
-                
+
                 if len(arg_list) < 2:
                     print("** attribute name missing **")
                     return
@@ -213,10 +213,12 @@ class HBNBCommand(cmd.Cmd):
                     print("** value missing **")
                     return
 
-                obj_id = arg_list[0].replace("update", '').replace('(', '').replace('"', '').replace(',', '')
+                obj_id = arg_list[0].replace("update", '') \
+                                    .replace('(', '') \
+                                    .replace('"', '') \
+                                    .replace(',', '')
                 attr_name = arg_list[1].replace(',', '')
                 attr_val = arg_list[2].strip("\"'")
-                print(attr_val)
 
                 key = f"{cls_name}.{obj_id}"
                 objs = storage.all()
