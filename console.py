@@ -228,7 +228,15 @@ class HBNBCommand(cmd.Cmd):
                     return
 
                 obj = objs[key]
-                setattr(obj, attr_name, attr_val)
+
+                if type(arg_list[1]) == dict:
+                    attr_name = arg_list[1].replace('{', '') \
+                                            .replace('}', '')
+                    print(attr_name)
+                    for key, value in arg_list[1].items():
+                        setattr(obj, attr_name, value)
+                else:
+                    setattr(obj, attr_name, attr_val)
                 obj.save()
 
         else:
