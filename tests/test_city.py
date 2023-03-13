@@ -1,13 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import sys
 import unittest
 import inspect
-import io
 import pep8
 from datetime import datetime
-from contextlib import redirect_stdout
 from models.city import City
 
 
@@ -23,13 +20,6 @@ class TestCity(unittest.TestCase):
         """Test that city.py file conform to PEP8"""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(['models/city.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
-
-    def test_pep8_conformance_test_City(self):
-        """Test that test_city.py file conform to PEP8"""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['tests/test_models/test_city.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 

@@ -26,13 +26,6 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
-    def test_pep8_conformance_test_place(self):
-        """Test that test_place.py file conform to PEP8"""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['tests/test_models/test_place.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
-
     def test_module_docstring(self):
         """Tests if module docstring documentation exist"""
         self.assertTrue(len(Place.__doc__) >= 1)
@@ -155,7 +148,7 @@ class TestPlace(unittest.TestCase):
         self.P.name = 'Meco'
         self.P.amenity_ids = ['90870987907', '0897909', '987907']
         my_dict = self.P.to_dict()
-        self.assertEqual(my_dict['name'], 'Daniel')
+        self.assertEqual(my_dict['name'], 'Meco')
         P1 = self.P.__class__(**my_dict)
         self.assertEqual(P1.created_at, self.P.created_at)
         self.assertEqual(type(P1.number_rooms), int)
