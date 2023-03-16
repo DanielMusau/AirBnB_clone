@@ -1,0 +1,8 @@
+header {
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    background-repeat: no-repeat;
+    background: white url("../");
+    background-position: 20px center;
+}
